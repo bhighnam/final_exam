@@ -7,4 +7,7 @@ class StaticPagesController < ApplicationController
   # performs all of the behind the scenes functions for the help.erb.html file
   def help
   end
+
+  def contact
+  end
 end
