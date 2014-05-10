@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
    # checks if the data entered in for the name attribute is 50 characters long and the text area is not blank before entering into the db
    before_save { self.email = email.downcase }
+   before_create :create_remember_token
+
    validates :name,  presence: true, length: { maximum: 50 }
    
    # checks if the data entered in for the email attribute is there before being entered into the db 
@@ -9,5 +11,19 @@ class User < ActiveRecord::Base
    
     has_secure_password
   validates :password, length: { minimum: 6 }
+   
+   def User.new_remember_token
+      SecureRandom.urlsafe_base64
+   end
+
+   def User.digest(token)
+       Digest::SHA1.hexdigest(token.to_s)
+   end
+   
+   private
+      def create_remember_token
+          self.remember_token = User.digest(User.new_remember_token)
+      end
+   
 
 end # end of User < ActiveRecord::Base
