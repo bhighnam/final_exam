@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+
+   has_many :microposts
    # checks if the data entered in for the name attribute is 50 characters long and the text area is not blank before entering into the db
    before_save { self.email = email.downcase }
    before_create :create_remember_token
