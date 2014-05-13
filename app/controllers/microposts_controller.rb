@@ -1,9 +1,9 @@
 class MicropostsController < ApplicationController
    before_action :signed_in_user
- 
+  
   def index
         
-   @micropost = Microposts.all
+  @micropost = Micropost.all
   
   end
 
