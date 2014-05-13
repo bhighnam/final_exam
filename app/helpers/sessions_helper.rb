@@ -8,6 +8,14 @@ module SessionsHelper
         self.current_user = user
 
    end # end of method sign_in
+
+    def signed_in?
+    !current_user.nil?
+  end
+
+  def current_user=(user)
+      @current_user = user
+  end
    
    def current_user
     remember_token = User.digest(cookies[:remember_token])
@@ -23,10 +31,6 @@ module SessionsHelper
       store_location
       redirect_to signin_url, notice: "Please sign in."
     end
-  end
-  
-  def signed_in?
-    !current_user.nil?
   end
   
   def sign_out
